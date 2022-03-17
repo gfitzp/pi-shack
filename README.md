@@ -181,8 +181,7 @@ server 192.168.1.1 iburst minpoll 3 maxpoll 5    # my network gateway
 pool time.apple.com iburst maxpoll 5
 pool time.google.com iburst maxpoll 5
 pool time.nist.gov iburst maxpoll 5
-pool us.pool.ntp.org iburst maxpoll 5            # may need to customize for your particular country or region
-                                                 # see https://www.ntppool.org/en/ for pool lists
+pool us.pool.ntp.org iburst maxpoll 5            # see https://www.ntppool.org/en/ for pool lists
 
 refclock PPS /dev/pps0 refid PPS precision 1e-7 lock NMEA          # PPS, locked to the NMEA/GPS timing
 refclock SHM 0 refid NMEA precision 1e-1 offset 0.541 delay 0.2    # NMEA (GPS)
