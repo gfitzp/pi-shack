@@ -1,8 +1,30 @@
 # pi-shack
-Steps and notes for installing a GPS-sourced local NTP server and HamClock
+Steps and notes for installing a GPS-sourced local NTP server and HamClock.
+
+## Components
+
+  - [Raspberry Pi 4](https://www.adafruit.com/product/4296)
+  - [Raspberry Pi PoE+ HAT](https://www.adafruit.com/product/5058)
+  - [Adafruit Ultimate GPS HAT](https://www.adafruit.com/product/2324)
+  - [Raspberry Pi Foundation 7" Display](https://www.adafruit.com/product/2718)
+  - [SmartiPi Touch Pro case](https://www.adafruit.com/product/4951)
+
+I power it with a PoE HAT since as a network time server it's always running, and I didn't have spare power outlets nearby.
+
+I tried running Raspberry Pi OS bullseye, but I can't seem to get it to boot when using the PoE+ HAT. Without the HAT it boots, so one day I may try a different PoE HAT to see if that works. In the meantime I'm using Raspberry Pi OS (Legacy) with desktop.
+
+Don't connect the case's USB-C passthrough cable to the Raspberry Pi board when using the PoE+ HAT; the HAT only expects to get power from the Ethernet jack and not from the Pi.
+
+The SmartiPi case has mounting brackets side-by-side. I mounted the PoE HAT on the on the right, and the GPS HAT on the left. I tried using a [ribbon cable](https://www.adafruit.com/product/1988) to connect the two, but there wasn't enough clearance on the PoE HAT for the ribbon cable to connect, so I made my own using [jumper cables](https://www.adafruit.com/product/3141) and [wire housing blocks](https://www.adafruit.com/product/3144).
+
+For the count-down timer I wired the button like the [HamClock user guide](http://www.clearskyinstitute.com/ham/HamClock/#tab-key) suggests (pin 37), but only the green LED (pins 17 and 35) so I don't have a red LED flashing at me when I'm not using the radio. I figure If I don't have a green light, I need to restate my callsign.
+
+I also wired up the satellite alarm (pin 38).
+
+I also added a button to turn the screen on/off on demand (pin 24). See [screenblanker](https://github.com/gfitzp/screenblanker) for details.
 
 ## Install screenblanker
-See [screenblanker](https://github.com/gfitzp/screenblanker) for details.
+
 ```
 cd ~/Documents &&
 git clone https://github.com/gfitzp/screenblanker.git &&
