@@ -8,6 +8,9 @@ Steps and notes for installing a GPS-sourced local NTP server and HamClock.
   - [Adafruit Ultimate GPS HAT](https://www.adafruit.com/product/2324)
   - [Raspberry Pi Foundation 7" Display](https://www.adafruit.com/product/2718)
   - [SmartiPi Touch Pro case](https://www.adafruit.com/product/4951)
+  - [RAM Mount VESA Plate](https://www.amazon.com/RAM-Mounts-RAM-2461U-75x75mm-Plate/dp/B002UM3PEO)
+  - [RAM Mount short arm](https://www.amazon.com/RAM-Mounts-RAM-201U-D-Compatible-Components/dp/B0055BJAV4)
+  - [RAM Mount round plate with ball](https://www.amazon.com/RAM-Mounts-Round-Plate-RAM-202U/dp/B0000BVFUC)
 
 I power it with a PoE HAT since as a network time server it's always running, and I didn't have spare power outlets nearby.
 
@@ -21,7 +24,9 @@ For the count-down timer I wired the button like the [HamClock user guide](http:
 
 I also wired up the satellite alarm (pin 38).
 
-I also added a button to turn the screen on/off on demand (pin 24). See [screenblanker](https://github.com/gfitzp/screenblanker) for details.
+I also added a button to turn the screen on/off on demand (pin 18). The breadboard of the GPS HAT is a great place to solder connections for a capacitor to prevent debouncing. See [screenblanker](https://github.com/gfitzp/screenblanker) for details.
+
+The case has VESA mounting points on the back, so I used the listed RAM Mount accessories to mount the case to my desk so it floats overhead for easy reach.
 
 ## Install screenblanker
 
