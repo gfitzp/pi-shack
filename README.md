@@ -18,7 +18,7 @@ I tried running Raspberry Pi OS bullseye, but I can't seem to get it to boot whe
 
 Don't connect the case's USB-C passthrough cable to the Raspberry Pi board when using the PoE+ HAT; the HAT only expects to get power from the Ethernet jack and not from the Pi.
 
-The SmartiPi case has mounting brackets side-by-side. I mounted the PoE HAT on the on the right, and the GPS HAT on the left. I tried using a [ribbon cable](https://www.adafruit.com/product/1988) to connect the two, but there wasn't enough clearance on the PoE HAT for the ribbon cable to connect, so I made my own using [jumper cables](https://www.adafruit.com/product/3141) and [wire housing blocks](https://www.adafruit.com/product/3144).
+The SmartiPi case has mounting brackets side-by-side. I mounted the Pi with the PoE HAT on the on the right, and the GPS HAT on the left. I tried using a [ribbon cable](https://www.adafruit.com/product/1988) to connect the two, but there wasn't enough clearance on the PoE HAT for the ribbon cable to connect, so I made my own using [jumper cables](https://www.adafruit.com/product/3141) and [wire housing blocks](https://www.adafruit.com/product/3144).
 
 For the count-down timer I wired the button like the [HamClock user guide](http://www.clearskyinstitute.com/ham/HamClock/#tab-key) suggests (pin 37), but only the green LED (pins 17 and 35) so I don't have a red LED flashing at me when I'm not using the radio. I figure If I don't have a green light, I need to restate my callsign.
 
