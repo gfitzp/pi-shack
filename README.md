@@ -177,24 +177,24 @@ makestep 1 3
 # Poll remote servers at most every 32 seconds (maxpoll 5 = 2^5 = 32)
 # Why? see https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_arp_is_the_sound_of_your_server_choking
 
-server 192.168.1.1 iburst minpoll 3 maxpoll 5    # my network gateway
+server 192.168.1.1 iburst minpoll 3 maxpoll 5
 pool time.apple.com iburst maxpoll 5
 pool time.google.com iburst maxpoll 5
 pool time.nist.gov iburst maxpoll 5
-pool us.pool.ntp.org iburst maxpoll 5            # see https://www.ntppool.org/en/ for pool lists
+pool us.pool.ntp.org iburst maxpoll 5
 
-refclock PPS /dev/pps0 refid PPS precision 1e-7 lock NMEA          # PPS, locked to the NMEA/GPS timing
-refclock SHM 0 refid NMEA precision 1e-1 offset 0.541 delay 0.2    # NMEA (GPS)
+refclock PPS /dev/pps0 refid PPS precision 1e-7 lock NMEA
+refclock SHM 0 refid NMEA precision 1e-1 offset 0.541 delay 0.2
 
 # Allow devices to use chrony as their NTP source
-allow 127.0.0.1         # local machine
-allow 192.168.0.0/16    # home network
-allow 100.64.0.0/10     # tailscale vpn network
+allow 127.0.0.1
+allow 192.168.0.0/16
+allow 100.64.0.0/10
 
 # Enable logging
 log tracking measurements statistics
 logdir /var/log/chrony
-logbanner 21    # show the banner every 21 rows
+logbanner 21
 EOT
 ```
 
