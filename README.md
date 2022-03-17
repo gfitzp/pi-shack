@@ -169,25 +169,36 @@ rtcsync
 # one second, but only in the first three clock updates.
 makestep 1 3
 
-# custom chrony configuration
+# Custom chrony configuration
 
-server 192.168.1.1 iburst minpoll 3 maxpoll 5
+# These servers are used when the GPS isn't working for some reason.
+# iburst is used on all servers when initially starting to speed up the first clock update
+# Poll the local server more frequently (minpoll 3 = 2^3 = at least every 8 seconds)
+# Poll remote servers at most every 32 seconds (maxpoll 5 = 2^5 = 32)
+# Why? see https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_arp_is_the_sound_of_your_server_choking
+
+server 192.168.1.1 iburst minpoll 3 maxpoll 5    # my network gateway
 pool time.apple.com iburst maxpoll 5
 pool time.google.com iburst maxpoll 5
 pool time.nist.gov iburst maxpoll 5
-pool us.pool.ntp.org iburst maxpoll 5
+pool us.pool.ntp.org iburst maxpoll 5            # may need to customize for your particular country or region
+                                                 # see https://www.ntppool.org/en/ for pool lists
 
-refclock PPS /dev/pps0 refid PPS precision 1e-7 lock NMEA
-refclock SHM 0 refid NMEA precision 1e-1 offset 0.541 delay 0.2
+refclock PPS /dev/pps0 refid PPS precision 1e-7 lock NMEA          # PPS, locked to the NMEA/GPS timing
+refclock SHM 0 refid NMEA precision 1e-1 offset 0.541 delay 0.2    # NMEA (GPS)
 
-allow 127.0.0.1
-allow 192.168.0.0/16
+# Allow devices to use chrony as their NTP source
+allow 127.0.0.1         # local machine
+allow 192.168.0.0/16    # home network
 
+# Enable logging
 log tracking measurements statistics
 logdir /var/log/chrony
-logbanner 21
+logbanner 21    # show the banner every 21 rows
 EOT
 ```
+
+You may need to experiment in order to determine your particular [offset](https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_chrony_performance_tuning) and delay values.
 
 ```
 sudo systemctl restart chronyd &&
@@ -208,8 +219,19 @@ cd /var/logs/chrony
 
 ## Install hamclock
 [HamClock by Elwood Downey, WB0OEW](http://www.clearskyinstitute.com/ham/HamClock/)
+
 ```
 curl -O http://www.clearskyinstitute.com/ham/HamClock/install-hc-rpi &&
 chmod u+x install-hc-rpi &&
 ./install-hc-rpi
 ```
+
+### Get the shack's latitude and longitude from cgps
+
+Manually enter in the latitude / longitude from `cgps` into the HamClock setup screen.
+
+It seems if gpsd is enabled in the HamClock, it uses gpsd for both GPS positioning and timekeeping. However, I don't believe gpsd uses the PPS output, so we get more accurate time from our local NTP server; we'll use that instead.
+
+### Set the NTP server to the local chronyd service
+
+Set "NTP?" on Page 2 of the HamClock setup screens to 127.0.0.1; we specifically allow the local machine to poll chrony for the network time in the chrony.conf file.
