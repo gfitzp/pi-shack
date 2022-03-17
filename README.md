@@ -190,6 +190,7 @@ refclock SHM 0 refid NMEA precision 1e-1 offset 0.541 delay 0.2    # NMEA (GPS)
 # Allow devices to use chrony as their NTP source
 allow 127.0.0.1         # local machine
 allow 192.168.0.0/16    # home network
+allow 100.64.0.0/10     # tailscale vpn network
 
 # Enable logging
 log tracking measurements statistics
