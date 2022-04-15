@@ -244,6 +244,14 @@ chronyc sources -v
 cd /var/logs/chrony
 ```
 
+## Have gpspipe connect once at startup
+
+Sometimes it seems chrony doesn't know about the GPS service until gpsmon is run. Append gpspipe to the `rc.local` startup file and have it output one NMEA line before it exits.
+
+```
+sed -i '$ s/exit 0/gpspipe -r -n 1 \&/g' /etc/rc.local ; echo exit 0 >> /etc/rc.local
+```
+
 ## Install hamclock
 [HamClock by Elwood Downey, WB0OEW](http://www.clearskyinstitute.com/ham/HamClock/)
 
