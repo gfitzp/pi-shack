@@ -225,6 +225,16 @@ logbanner 21
 EOT
 ```
 
+## Have gpspipe connect once at startup
+
+Sometimes it seems chrony doesn't know about the GPS service until gpsmon is run. Append gpspipe to the `rc.local` startup file and have it output one NMEA line before it exits.
+
+```
+sed -i '$ s/exit 0/gpspipe -r -n 1 \&/g' /etc/rc.local ; echo exit 0 >> /etc/rc.local
+```
+
+## Start chrony
+
 You may need to experiment in order to determine your particular [offset](https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_chrony_performance_tuning) and delay values.
 
 ```
@@ -242,14 +252,6 @@ chronyc sources -v
 
 ```
 cd /var/logs/chrony
-```
-
-## Have gpspipe connect once at startup
-
-Sometimes it seems chrony doesn't know about the GPS service until gpsmon is run. Append gpspipe to the `rc.local` startup file and have it output one NMEA line before it exits.
-
-```
-sed -i '$ s/exit 0/gpspipe -r -n 1 \&/g' /etc/rc.local ; echo exit 0 >> /etc/rc.local
 ```
 
 ## Install hamclock
