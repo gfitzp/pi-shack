@@ -79,7 +79,7 @@ sudo apt -y auto-remove
 ## Install tools needed for GPS support
 
 ```
-sudo apt-get -y install gpsd gpsd-clients python-gps pps-tools
+sudo apt-get -y install gpsd gpsd-clients gpsd-tools pps-tools
 ```
 
 ## Configure GPS, enable PPS, and set other system configuration options
